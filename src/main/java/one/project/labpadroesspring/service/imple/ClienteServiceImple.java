@@ -58,7 +58,7 @@ public class ClienteServiceImple implements ClienteService{
 		// Verificar se o Endereco do Cliente já existe (pelo CEP).
 		String cep = cliente.getEndereco().getCep();
 		Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
-			// Caso não exista, integrar com o ViaCEP e persistir o retorno.
+			// Caso não exista no banco, integrar com o ViaCEP e persistir o retorno.
 			Endereco novoEndereco = viaCepService.consultarCep(cep);
 			enderecoRepository.save(novoEndereco);
 			return novoEndereco;
